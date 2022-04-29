@@ -1,4 +1,4 @@
-import 'package:ferme_vaches_mobile/home/bovin_page_body.dart';
+import 'package:ferme_vaches_mobile/pages/home/bovin_page_body.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:ferme_vaches_mobile/widgets/big_text.dart';

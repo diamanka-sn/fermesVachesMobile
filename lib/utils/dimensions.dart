@@ -26,4 +26,9 @@ class Dimensions {
   static double radius15 = screenHeight / 56.27;
 
   static double iconSize24 = screenHeight / 35.17;
+
+  //liste produits
+
+  static double listeViewImgSize = screewidth / 3.25;
+  static double listeViewTextCountSize = screewidth / 3.9;
 }

@@ -90,80 +90,85 @@ class _BovinPageBodyState extends State<BovinPageBody> {
           ]),
         ),
         //Liste de produits
-        Container(
-          height: 900,
-          child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              //shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                      bottom: Dimensions.height10),
-                  child: Row(children: [
-                    //Images listes produits
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius20),
-                          color: Colors.white30,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/images/1.jpg"))),
-                    ),
-                    //Textes listes produits
-                    Expanded(
-                      child: Container(
-                          height: 100,
-                          // width: 200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.radius20),
-                                bottomRight:
-                                    Radius.circular(Dimensions.radius20)),
-                            color: Colors.white,
+        ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    bottom: Dimensions.height10),
+                child: Row(children: [
+                  //Images listes produits
+                  Container(
+                    width: Dimensions.listeViewImgSize,
+                    height: Dimensions.listeViewImgSize,
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: Colors.white30,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage("assets/images/1.jpg"))),
+                  ),
+                  //Textes listes produits
+                  Expanded(
+                    child: Container(
+                        height: Dimensions.listeViewTextCountSize,
+                        // width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight:
+                                  Radius.circular(Dimensions.radius20)),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: Dimensions.width10,
+                              right: Dimensions.width10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(text: "Lait 100% naturel"),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              SmallText(text: "Consomes en toute securité"),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconAndTextWidget(
+                                    icon: Icons.circle_sharp,
+                                    text: "Normal",
+                                    iconColor: AppColors.iconColor1,
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.location_on,
+                                    text: "1.7km",
+                                    iconColor: AppColors.mainColor,
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.access_time_rounded,
+                                    text: "32min",
+                                    iconColor: AppColors.iconColor2,
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: Dimensions.width10,
-                                right: Dimensions.width10),
-                            child: Column(
-                              children: [
-                                BigText(text: "Lait 100% naturel"),
-                                SmallText(text: "Consomes en toute securité"),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IconAndTextWidget(
-                                      icon: Icons.circle_sharp,
-                                      text: "Normal",
-                                      iconColor: AppColors.iconColor1,
-                                    ),
-                                    IconAndTextWidget(
-                                      icon: Icons.location_on,
-                                      text: "1.7km",
-                                      iconColor: AppColors.mainColor,
-                                    ),
-                                    IconAndTextWidget(
-                                      icon: Icons.access_time_rounded,
-                                      text: "32min",
-                                      iconColor: AppColors.iconColor2,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )),
-                    )
-                  ]),
-                );
-              }),
-        )
+                        )),
+                  )
+                ]),
+              );
+            }),
       ],
     );
   }
