@@ -64,7 +64,10 @@ class _MainHomePageState extends State<MainHomePage> {
             ),
           ),
         ),
-        BovinPageBody(),
+        Expanded(
+            child: SingleChildScrollView(
+          child: BovinPageBody(),
+        ))
       ]),
     );
   }
