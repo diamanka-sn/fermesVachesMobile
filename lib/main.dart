@@ -1,5 +1,6 @@
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/produits/produit_detail_page.dart';
+import 'package:ferme_vaches_mobile/pages/home/produits/recommanded_produit_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       //home: MainHomePage(),
-      home: ProduitDetailPage(),
+      home: RecommandedProduitDetail(),
     );
   }
 }

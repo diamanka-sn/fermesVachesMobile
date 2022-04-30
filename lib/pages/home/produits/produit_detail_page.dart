@@ -3,6 +3,7 @@ import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:ferme_vaches_mobile/widgets/app_column.dart';
 import 'package:ferme_vaches_mobile/widgets/app_icon.dart';
 import 'package:ferme_vaches_mobile/widgets/big_text.dart';
+import 'package:ferme_vaches_mobile/widgets/description_text.dart';
 import 'package:ferme_vaches_mobile/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class ProduitDetailPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //Image arriere plan
           Positioned(
               left: 0,
               right: 0,
@@ -29,6 +31,7 @@ class ProduitDetailPage extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: AssetImage("assets/images/1.jpg"))),
               )),
+          //icone retour et panier
           Positioned(
               top: Dimensions.height45,
               left: Dimensions.width20,
@@ -40,6 +43,7 @@ class ProduitDetailPage extends StatelessWidget {
                   AppIcon(icon: Icons.shopping_cart_outlined),
                 ],
               )),
+          //Details du produits
           Positioned(
               left: 0,
               right: 0,
@@ -62,9 +66,20 @@ class ProduitDetailPage extends StatelessWidget {
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      BigText(text: "Description")
+                      BigText(text: "Description"),
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: DescriptionText(
+                              text:
+                                  "Plusieurs fournisseurs offrent certaines solutions qui permettent aux entreprises de migrer vers le monde IP. Des constructeurs de PABX tels que Nortel, Siemens, et Alcatel préfèrent la solution de l'intégration progressive de la VoIP en ajoutant des cartes extensions IP. . Cette approche facilite l'adoption du téléphone IP surtout dans les grandes sociétés possédant une plateforme classique et voulant bénéficier de la voix sur IP. Mais elle ne permet pas de bénéficier de tous les services et la bonne intégration vers le monde des données. Le développement des logiciels PABX est la solution proposée par des fournisseurs tels que Cisco et Astérisque. Cette approche permet de bénéficier d'une grande efficacité flexible, d'une très bonne intégration au monde des données et de voix, et surtout d'un prix beaucoup plus intéressant. Cette approche facilite l'adoption du téléphone IP surtout dans les grandes sociétés possédant une plateforme classique et voulant bénéficier de la voix sur IP. Mais elle ne permet pas de bénéficier de tous les services et la bonne intégration vers le monde des données. Le développement des logiciels PABX est la solution proposée par des fournisseurs tels que Cisco et Astérisque. Cette approche permet de bénéficier d'une grande efficacité flexible, d'une très bonne intégration au monde des données et de voix, et surtout d'un prix beaucoup plus intéressant."),
+                        ),
+                      )
                     ],
                   )))
+          //Description des produits
         ],
       ),
       bottomNavigationBar: Container(
