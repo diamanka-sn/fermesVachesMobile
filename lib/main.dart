@@ -4,7 +4,11 @@ import 'package:ferme_vaches_mobile/pages/home/produits/recommanded_produit_deta
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'helper/dependencies.dart' as dep;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 

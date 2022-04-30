@@ -44,7 +44,7 @@ class _DescriptionTextState extends State<DescriptionText> {
           : Column(
               children: [
                 SmallText(
-                    height: 1.0,
+                    height: 1.5,
                     color: AppColors.paraColor,
                     size: Dimensions.font16,
                     text: hiddenText
