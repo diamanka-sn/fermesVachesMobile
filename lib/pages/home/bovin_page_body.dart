@@ -1,14 +1,19 @@
 import 'dart:ffi';
 
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
+import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
+import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:ferme_vaches_mobile/widgets/app_column.dart';
+import 'package:ferme_vaches_mobile/widgets/app_constants.dart';
 import 'package:ferme_vaches_mobile/widgets/big_text.dart';
 import 'package:ferme_vaches_mobile/widgets/icon_and_text_widget.dart';
 import 'package:ferme_vaches_mobile/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BovinPageBody extends StatefulWidget {
   const BovinPageBody({Key? key}) : super(key: key);
@@ -42,27 +47,38 @@ class _BovinPageBodyState extends State<BovinPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          //color: Colors.redAccent,
-          height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
-        new DotsIndicator(
-          dotsCount: 5,
-          position: _currPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
+        GetBuilder<ProduitController>(builder: (produits) {
+          return produits.isLoaded
+              ? Container(
+                  //color: Colors.redAccent,
+                  height: Dimensions.pageView,
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: produits.produitList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(
+                            position, produits.produitList[position]);
+                      }),
+                )
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
+        }),
+        GetBuilder<ProduitController>(builder: (produits) {
+          return new DotsIndicator(
+            dotsCount:
+                produits.produitList.isEmpty ? 1 : produits.produitList.length,
+            position: _currPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
+          );
+        }),
+
         SizedBox(
           height: Dimensions.height30,
         ),
@@ -91,90 +107,101 @@ class _BovinPageBodyState extends State<BovinPageBody> {
           ]),
         ),
         //Liste de produits
-        ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.width20,
-                    right: Dimensions.width20,
-                    bottom: Dimensions.height10),
-                child: Row(children: [
-                  //Images listes produits
-                  Container(
-                    width: Dimensions.listeViewImgSize,
-                    height: Dimensions.listeViewImgSize,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.white30,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/images/1.jpg"))),
-                  ),
-                  //Textes listes produits
-                  Expanded(
-                    child: Container(
-                        height: Dimensions.listeViewTextCountSize,
-                        // width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.radius20),
-                              bottomRight:
-                                  Radius.circular(Dimensions.radius20)),
-                          color: Colors.white,
+        GetBuilder<RecommandedController>(builder: (recommanded) {
+          return recommanded.isLoaded
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: recommanded.recommandedProduitList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                          bottom: Dimensions.height10),
+                      child: Row(children: [
+                        //Images listes produits
+                        Container(
+                          width: Dimensions.listeViewImgSize,
+                          height: Dimensions.listeViewImgSize,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              color: Colors.white30,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(AppConstans.BASE_URL +
+                                      AppConstans.UPLOAD_URL +
+                                      recommanded.recommandedProduitList[index]
+                                          .img!))),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.width10,
-                              right: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              BigText(text: "Lait 100% naturel"),
-                              SizedBox(
-                                height: Dimensions.height10,
+                        //Textes listes produits
+                        Expanded(
+                          child: Container(
+                              height: Dimensions.listeViewTextCountSize,
+                              // width: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20)),
+                                color: Colors.white,
                               ),
-                              SmallText(text: "Consomes en toute securité"),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconAndTextWidget(
-                                    icon: Icons.circle_sharp,
-                                    text: "Normal",
-                                    iconColor: AppColors.iconColor1,
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.location_on,
-                                    text: "1.7km",
-                                    iconColor: AppColors.mainColor,
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.access_time_rounded,
-                                    text: "32min",
-                                    iconColor: AppColors.iconColor2,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        )),
-                  )
-                ]),
-              );
-            }),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.width10,
+                                    right: Dimensions.width10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BigText(text: "Lait 100% naturel"),
+                                    SizedBox(
+                                      height: Dimensions.height10,
+                                    ),
+                                    SmallText(
+                                        text: "Consomes en toute securité"),
+                                    SizedBox(
+                                      height: Dimensions.height10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconAndTextWidget(
+                                          icon: Icons.circle_sharp,
+                                          text: "Normal",
+                                          iconColor: AppColors.iconColor1,
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.location_on,
+                                          text: "1.7km",
+                                          iconColor: AppColors.mainColor,
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.access_time_rounded,
+                                          text: "32min",
+                                          iconColor: AppColors.iconColor2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
+                        )
+                      ]),
+                    );
+                  })
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
+        })
       ],
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel produits) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -211,7 +238,10 @@ class _BovinPageBodyState extends State<BovinPageBody> {
               borderRadius: BorderRadius.circular(Dimensions.radius30),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage('assets/images/1.jpg'))),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(AppConstans.BASE_URL +
+                      AppConstans.UPLOAD_URL +
+                      produits.img!))),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -235,7 +265,7 @@ class _BovinPageBodyState extends State<BovinPageBody> {
             child: Container(
               padding: EdgeInsets.only(
                   top: Dimensions.height15, left: 15, right: 15),
-              child: AppColumn(text: "Lait 100% naturel"),
+              child: AppColumn(text: produits.name!),
             ),
           ),
         )
