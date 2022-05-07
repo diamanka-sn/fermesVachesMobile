@@ -1,4 +1,5 @@
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
+import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
@@ -96,59 +97,75 @@ class ProduitDetailPage extends StatelessWidget {
           //Description des produits
         ],
       ),
-      bottomNavigationBar: Container(
-        height: Dimensions.bottomHeightBar,
-        padding: EdgeInsets.only(
-            top: Dimensions.height30,
-            bottom: Dimensions.height30,
-            left: Dimensions.width20,
-            right: Dimensions.width20),
-        decoration: BoxDecoration(
-            color: AppColors.buttonBackgroundColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.radius20 * 2),
-                topRight: Radius.circular(Dimensions.radius20 * 2))),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Container(
+      bottomNavigationBar: GetBuilder<ProduitController>(
+        builder: (produits) {
+          return Container(
+            height: Dimensions.bottomHeightBar,
             padding: EdgeInsets.only(
-                top: Dimensions.height20,
-                bottom: Dimensions.height20,
+                top: Dimensions.height30,
+                bottom: Dimensions.height30,
                 left: Dimensions.width20,
                 right: Dimensions.width20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: Colors.white),
-            child: Row(children: [
-              Icon(
-                Icons.remove,
-                color: AppColors.signColor,
-              ),
-              SizedBox(
-                width: Dimensions.width10 / 2,
-              ),
-              BigText(text: "0"),
-              SizedBox(
-                width: Dimensions.width10 / 2,
-              ),
-              Icon(Icons.add, color: AppColors.signColor)
-            ]),
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                top: Dimensions.height20,
-                bottom: Dimensions.height20,
-                left: Dimensions.width20,
-                right: Dimensions.width20),
-            child: BigText(
-              text: "F ${produit.price!} | Ajouter au panier",
-              color: Colors.white,
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: AppColors.mainColor),
-          )
-        ]),
+                color: AppColors.buttonBackgroundColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimensions.radius20 * 2),
+                    topRight: Radius.circular(Dimensions.radius20 * 2))),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.width20,
+                        right: Dimensions.width20),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: Colors.white),
+                    child: Row(children: [
+                      GestureDetector(
+                        onTap: () {
+                          produits.setQuantity(false);
+                        },
+                        child: Icon(
+                          Icons.remove,
+                          color: AppColors.signColor,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Dimensions.width10 / 2,
+                      ),
+                      BigText(text: produits.quantity.toString()),
+                      SizedBox(
+                        width: Dimensions.width10 / 2,
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            produits.setQuantity(true);
+                          },
+                          child: Icon(Icons.add, color: AppColors.signColor))
+                    ]),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.width20,
+                        right: Dimensions.width20),
+                    child: BigText(
+                      text: "F ${produit.price!} | Ajouter au panier",
+                      color: Colors.white,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: AppColors.mainColor),
+                  )
+                ]),
+          );
+        },
       ),
     );
   }
