@@ -8,7 +8,9 @@ import 'package:flutter/widgets.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
-  const AppColumn({Key? key, required this.text}) : super(key: key);
+  final int price;
+  const AppColumn({Key? key, required this.text, required this.price})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class AppColumn extends StatelessWidget {
         children: [
           IconAndTextWidget(
             icon: Icons.circle_sharp,
-            text: "Normal",
+            text: price.toString() + " F cfa",
             iconColor: AppColors.iconColor1,
           ),
           IconAndTextWidget(

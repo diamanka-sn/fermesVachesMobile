@@ -1,3 +1,4 @@
+import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:ferme_vaches_mobile/widgets/app_icon.dart';
@@ -5,6 +6,7 @@ import 'package:ferme_vaches_mobile/widgets/big_text.dart';
 import 'package:ferme_vaches_mobile/widgets/description_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecommandedProduitDetail extends StatelessWidget {
   const RecommandedProduitDetail({Key? key}) : super(key: key);
@@ -16,11 +18,17 @@ class RecommandedProduitDetail extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon: Icons.clear),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.clear),
+                  ),
                   AppIcon(icon: Icons.shopping_cart_outlined)
                 ]),
             bottom: PreferredSize(

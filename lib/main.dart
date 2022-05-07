@@ -4,6 +4,7 @@ import 'package:ferme_vaches_mobile/pages/home/bovin_page_body.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/produits/produit_detail_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/produits/recommanded_produit_details.dart';
+import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,11 +27,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'KosSam Ferme',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.green,
+      // ),
       //home: MainHomePage(),
       home: MainHomePage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }
