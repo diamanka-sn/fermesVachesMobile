@@ -15,8 +15,8 @@ import 'package:get/get.dart';
 import '../../../widgets/icon_and_text_widget.dart';
 
 class ProduitDetailPage extends StatelessWidget {
-  int pageId;
-  ProduitDetailPage({Key? key, required this.pageId}) : super(key: key);
+  final int pageId;
+  const ProduitDetailPage({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class ProduitDetailPage extends StatelessWidget {
                 left: Dimensions.width20,
                 right: Dimensions.width20),
             child: BigText(
-              text: "F ${produit.price} | Ajouter au panier",
+              text: "F ${produit.price!} | Ajouter au panier",
               color: Colors.white,
             ),
             decoration: BoxDecoration(

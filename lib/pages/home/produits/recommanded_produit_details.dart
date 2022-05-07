@@ -1,6 +1,8 @@
+import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
 import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
+import 'package:ferme_vaches_mobile/widgets/app_constants.dart';
 import 'package:ferme_vaches_mobile/widgets/app_icon.dart';
 import 'package:ferme_vaches_mobile/widgets/big_text.dart';
 import 'package:ferme_vaches_mobile/widgets/description_text.dart';
@@ -9,10 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecommandedProduitDetail extends StatelessWidget {
-  const RecommandedProduitDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommandedProduitDetail({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommandedController>().recommandedProduitList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -37,7 +43,7 @@ class RecommandedProduitDetail extends StatelessWidget {
                 child: Center(
                     child: BigText(
                   size: Dimensions.font26,
-                  text: "Lait 100% Naturel",
+                  text: product.name!,
                 )),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 5, bottom: 10),
@@ -53,8 +59,8 @@ class RecommandedProduitDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/1.jpg",
+              background: Image.network(
+                AppConstans.BASE_URL + AppConstans.UPLOAD_URL + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -64,9 +70,7 @@ class RecommandedProduitDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: DescriptionText(
-                      text:
-                          "Plusieurs fournisseurs offrent certaines solutions qui permettent aux entreprises de migrer vers le monde IP. Des constructeurs de PABX tels que Nortel, Siemens, et Alcatel préfèrent la solution de l'intégration progressive de la VoIP en ajoutant des cartes extensions IP. Cette approche facilite l'adoption du téléphone IP surtout dans les grandes sociétés possédant une plateforme classique et voulant bénéficier de la voix sur IP. Mais elle ne permet pas de bénéficier de tous les services et la bonne intégration vers le monde des données. Le développement des logiciels PABX est la solution proposée par des fournisseurs tels que Cisco et Astérisque. Cette approche permet de bénéficier d'une grande efficacité flexible, d'une très bonne intégration au monde des données et de voix, et surtout d'un prix beaucoup plus intéressant.Plusieurs fournisseurs offrent certaines solutions qui permettent aux entreprises de migrer vers le monde IP. Des constructeurs de PABX tels que Nortel, Siemens, et Alcatel préfèrent la solution de l'intégration progressive de la VoIP en ajoutant des cartes extensions IP. Cette approche facilite l'adoption du téléphone IP surtout dans les grandes sociétés possédant une plateforme classique et voulant bénéficier de la voix sur IP. Mais elle ne permet pas de bénéficier de tous les services et la bonne intégration vers le monde des données. Le développement des logiciels PABX est la solution proposée par des fournisseurs tels que Cisco et Astérisque. Cette approche permet de bénéficier d'une grande efficacité flexible, d'une très bonne intégration au monde des données et de voix, et surtout d'un prix beaucoup plus intéressant. Plusieurs fournisseurs offrent certaines solutions qui permettent aux entreprises de migrer vers le monde IP. Des constructeurs de PABX tels que Nortel, Siemens, et Alcatel préfèrent la solution de l'intégration progressive de la VoIP en ajoutant des cartes extensions IP. Cette approche facilite l'adoption du téléphone IP surtout dans les grandes sociétés possédant une plateforme classique et voulant bénéficier de la voix sur IP. Mais elle ne permet pas de bénéficier de tous les services et la bonne intégration vers le monde des données. Le développement des logiciels PABX est la solution proposée par des fournisseurs tels que Cisco et Astérisque. Cette approche permet de bénéficier d'une grande efficacité flexible, d'une très bonne intégration au monde des données et de voix, et surtout d'un prix beaucoup plus intéressant.Ce rapport se compose de deux chapitres. Le premier chapitre introduit la voix sur IP et Asterisk. Le deuxième chapitre s'intéresse à la mise en place du serveur d’Asterisk."),
+                  child: DescriptionText(text: product.description!),
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
                 )
@@ -93,7 +97,7 @@ class RecommandedProduitDetail extends StatelessWidget {
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
                 BigText(
-                  text: "1200 F" + " X " + "0",
+                  text: "${product.price!} F cfa X 0",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),

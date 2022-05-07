@@ -119,7 +119,7 @@ class _BovinPageBodyState extends State<BovinPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommandedProduit());
+                        Get.toNamed(RouteHelper.getRecommandedProduit(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(

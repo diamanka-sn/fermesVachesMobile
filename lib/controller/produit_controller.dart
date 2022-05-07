@@ -13,6 +13,8 @@ class ProduitController extends GetxController {
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
+  int _quantity = 0;
+
   Future<void> getProduitList() async {
     Response response = await produitRepo.getProduitList();
     if (response.statusCode == 200) {
@@ -22,5 +24,13 @@ class ProduitController extends GetxController {
       _isLoaded = true;
       update();
     } else {}
+  }
+
+  void setQuantity(bool isIncrement) {
+    if (isIncrement) {
+      _quantity = _quantity + 1;
+    } else {
+      _quantity = _quantity - 1;
+    }
   }
 }
