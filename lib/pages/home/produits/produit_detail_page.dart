@@ -22,6 +22,7 @@ class ProduitDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var produit = Get.find<ProduitController>().produitList[pageId];
+    Get.find<ProduitController>().initProduit();
     //  print(pageId.toString());
     return Scaffold(
       backgroundColor: Colors.white,
