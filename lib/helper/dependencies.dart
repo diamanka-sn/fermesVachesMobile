@@ -1,5 +1,7 @@
+import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
+import 'package:ferme_vaches_mobile/data/repository/cart_repo.dart';
 import 'package:ferme_vaches_mobile/data/repository/produit_repo.dart';
 import 'package:ferme_vaches_mobile/data/repository/recommanded_repo.dart';
 import 'package:ferme_vaches_mobile/widgets/app_constants.dart';
@@ -13,8 +15,10 @@ Future<void> init() async {
 //repos
   Get.lazyPut(() => ProduitRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommandedRepo(apiClient: Get.find()));
+  Get.lazyPut(() => CartRepo());
 
   //controller
   Get.lazyPut(() => ProduitController(produitRepo: Get.find()));
   Get.lazyPut(() => RecommandedController(recommandedRepo: Get.find()));
+  Get.lazyPut(() => CartController(cartRepo: Get.find()));
 }

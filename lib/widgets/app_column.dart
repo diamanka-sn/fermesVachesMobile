@@ -44,7 +44,7 @@ class AppColumn extends StatelessWidget {
           SizedBox(
             width: 10,
           ),
-          SmallText(text: "Comments")
+          SmallText(text: "Commandes")
         ],
       ),
       SizedBox(
@@ -58,16 +58,16 @@ class AppColumn extends StatelessWidget {
             text: price.toString() + " F cfa",
             iconColor: AppColors.iconColor1,
           ),
-          IconAndTextWidget(
-            icon: Icons.location_on,
-            text: "1.7km",
-            iconColor: AppColors.mainColor,
-          ),
-          IconAndTextWidget(
-            icon: Icons.access_time_rounded,
-            text: "32min",
-            iconColor: AppColors.iconColor2,
-          ),
+          // IconAndTextWidget(
+          //   icon: Icons.location_on,
+          //   text: "1.7km",
+          //   iconColor: AppColors.mainColor,
+          // ),
+          // IconAndTextWidget(
+          //   icon: Icons.access_time_rounded,
+          //   text: "32min",
+          //   iconColor: AppColors.iconColor2,
+          // ),
         ],
       )
     ]);

@@ -1,3 +1,4 @@
+import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/data/repository/produit_repo.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
@@ -11,6 +12,7 @@ class ProduitController extends GetxController {
 
   List<dynamic> _produitList = [];
   List<dynamic> get produitList => _produitList;
+  late CartController _cart;
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
@@ -51,8 +53,26 @@ class ProduitController extends GetxController {
     }
   }
 
-  void initProduit() {
+  void initProduit(ProductModel produit, CartController cart) {
     _quantity = 0;
     _inCartItems = 0;
+    _cart = cart;
+    var exist = false;
+
+    exist = _cart.existInCart(produit);
+    if (exist) {
+      _inCartItems = _cart.getQuantity(produit);
+    }
+  }
+
+  void addItem(ProductModel produit) {
+    if (_quantity > 0) {
+      _cart.addItem(produit, quantity);
+      _quantity = 0;
+      _cart.items.forEach((key, value) {});
+    } else {
+      Get.snackbar("Compteur produit", "Ajouter au moins un produit!",
+          backgroundColor: AppColors.mainColor, colorText: Colors.white);
+    }
   }
 }

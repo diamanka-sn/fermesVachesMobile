@@ -89,7 +89,7 @@ class _BovinPageBodyState extends State<BovinPageBody> {
         Container(
           margin: EdgeInsets.only(left: Dimensions.width30),
           child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            BigText(text: "Populaire"),
+            BigText(text: "Bovins"),
             SizedBox(
               width: Dimensions.width10,
             ),
@@ -191,16 +191,16 @@ class _BovinPageBodyState extends State<BovinPageBody> {
                                                 " Fcfa",
                                             iconColor: AppColors.iconColor1,
                                           ),
-                                          IconAndTextWidget(
-                                            icon: Icons.location_on,
-                                            text: "1.7km",
-                                            iconColor: AppColors.mainColor,
-                                          ),
-                                          IconAndTextWidget(
-                                            icon: Icons.access_time_rounded,
-                                            text: "32min",
-                                            iconColor: AppColors.iconColor2,
-                                          ),
+                                          // IconAndTextWidget(
+                                          //   icon: Icons.location_on,
+                                          //   text: "1.7km",
+                                          //   iconColor: AppColors.mainColor,
+                                          // ),
+                                          // IconAndTextWidget(
+                                          //   icon: Icons.access_time_rounded,
+                                          //   text: "32min",
+                                          //   iconColor: AppColors.iconColor2,
+                                          // ),
                                         ],
                                       )
                                     ],

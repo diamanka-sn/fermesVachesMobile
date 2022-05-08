@@ -1,3 +1,4 @@
+import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
@@ -22,7 +23,8 @@ class ProduitDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var produit = Get.find<ProduitController>().produitList[pageId];
-    Get.find<ProduitController>().initProduit();
+    Get.find<ProduitController>()
+        .initProduit(produit, Get.find<CartController>());
     //  print(pageId.toString());
     return Scaffold(
       backgroundColor: Colors.white,
@@ -138,7 +140,7 @@ class ProduitDetailPage extends StatelessWidget {
                       SizedBox(
                         width: Dimensions.width10 / 2,
                       ),
-                      BigText(text: produits.quantity.toString()),
+                      BigText(text: produits.inCartItems.toString()),
                       SizedBox(
                         width: Dimensions.width10 / 2,
                       ),
@@ -155,9 +157,14 @@ class ProduitDetailPage extends StatelessWidget {
                         bottom: Dimensions.height20,
                         left: Dimensions.width20,
                         right: Dimensions.width20),
-                    child: BigText(
-                      text: "F ${produit.price!} | Ajouter au panier",
-                      color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        produits.addItem(produit);
+                      },
+                      child: BigText(
+                        text: "Ajouter au panier",
+                        color: Colors.white,
+                      ),
                     ),
                     decoration: BoxDecoration(
                         borderRadius:
