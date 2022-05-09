@@ -57,7 +57,38 @@ class ProduitDetailPage extends StatelessWidget {
                         Get.to(() => MainHomePage());
                       },
                       child: AppIcon(icon: Icons.arrow_back_ios)),
-                  AppIcon(icon: Icons.shopping_cart_outlined),
+                  GetBuilder<ProduitController>(builder: (p) {
+                    return Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        Get.find<ProduitController>().totalItems >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        Get.find<ProduitController>().totalItems >= 1
+                            ? Positioned(
+                                right: 6,
+                                top: 3,
+                                child: BigText(
+                                  text: Get.find<ProduitController>()
+                                      .totalItems
+                                      .toString(),
+                                  size: 13,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Container(),
+                      ],
+                    );
+                  })
                 ],
               )),
           //Details du produits

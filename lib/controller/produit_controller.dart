@@ -44,7 +44,7 @@ class ProduitController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_inCartItems + quantity) < 0) {
       Get.snackbar("Compteur produit", "Impossible de réduire plus!",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
       return 0;
@@ -66,13 +66,16 @@ class ProduitController extends GetxController {
   }
 
   void addItem(ProductModel produit) {
-    if (_quantity > 0) {
-      _cart.addItem(produit, quantity);
-      _quantity = 0;
-      _cart.items.forEach((key, value) {});
-    } else {
-      Get.snackbar("Compteur produit", "Ajouter au moins un produit!",
-          backgroundColor: AppColors.mainColor, colorText: Colors.white);
-    }
+    _cart.addItem(produit, _quantity);
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(produit);
+
+    _cart.items.forEach((key, value) {});
+
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
