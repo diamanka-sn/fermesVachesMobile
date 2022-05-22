@@ -1,6 +1,7 @@
 import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
+import 'package:ferme_vaches_mobile/pages/home/cart/cart_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
@@ -60,7 +61,11 @@ class ProduitDetailPage extends StatelessWidget {
                   GetBuilder<ProduitController>(builder: (p) {
                     return Stack(
                       children: [
-                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        GestureDetector(
+                            onTap: () {
+                              Get.to(() => CartPage());
+                            },
+                            child: AppIcon(icon: Icons.shopping_cart_outlined)),
                         Get.find<ProduitController>().totalItems >= 1
                             ? Positioned(
                                 right: 0,
@@ -75,13 +80,13 @@ class ProduitDetailPage extends StatelessWidget {
                             : Container(),
                         Get.find<ProduitController>().totalItems >= 1
                             ? Positioned(
-                                right: 6,
+                                right: 3,
                                 top: 3,
                                 child: BigText(
                                   text: Get.find<ProduitController>()
                                       .totalItems
                                       .toString(),
-                                  size: 13,
+                                  size: 12,
                                   color: Colors.white,
                                 ),
                               )
@@ -182,25 +187,25 @@ class ProduitDetailPage extends StatelessWidget {
                           child: Icon(Icons.add, color: AppColors.signColor))
                     ]),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: Dimensions.height20,
-                        bottom: Dimensions.height20,
-                        left: Dimensions.width20,
-                        right: Dimensions.width20),
-                    child: GestureDetector(
-                      onTap: () {
-                        produits.addItem(produit);
-                      },
+                  GestureDetector(
+                    onTap: () {
+                      produits.addItem(produit);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          top: Dimensions.height20,
+                          bottom: Dimensions.height20,
+                          left: Dimensions.width20,
+                          right: Dimensions.width20),
                       child: BigText(
                         text: "Ajouter au panier",
                         color: Colors.white,
                       ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: AppColors.mainColor),
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: AppColors.mainColor),
                   )
                 ]),
           );

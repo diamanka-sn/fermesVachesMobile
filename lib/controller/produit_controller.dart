@@ -1,5 +1,6 @@
 import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/data/repository/produit_repo.dart';
+import 'package:ferme_vaches_mobile/model/cart_model.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,11 @@ class ProduitController extends GetxController {
   int checkQuantity(int quantity) {
     if ((_inCartItems + quantity) < 0) {
       Get.snackbar("Compteur produit", "Impossible de réduire plus!",
-          backgroundColor: AppColors.mainColor, colorText: Colors.white);
+          backgroundColor: Colors.redAccent, colorText: Colors.white);
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else {
       return quantity;
@@ -77,5 +82,9 @@ class ProduitController extends GetxController {
 
   int get totalItems {
     return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }
