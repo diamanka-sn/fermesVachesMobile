@@ -3,6 +3,7 @@ import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
 import 'package:ferme_vaches_mobile/pages/home/cart/cart_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
+import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:ferme_vaches_mobile/widgets/app_column.dart';
@@ -59,39 +60,41 @@ class ProduitDetailPage extends StatelessWidget {
                       },
                       child: AppIcon(icon: Icons.arrow_back_ios)),
                   GetBuilder<ProduitController>(builder: (p) {
-                    return Stack(
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Get.to(() => CartPage());
-                            },
-                            child: AppIcon(icon: Icons.shopping_cart_outlined)),
-                        Get.find<ProduitController>().totalItems >= 1
-                            ? Positioned(
-                                right: 0,
-                                top: 0,
-                                child: AppIcon(
-                                  icon: Icons.circle,
-                                  size: 20,
-                                  iconColor: Colors.transparent,
-                                  backgroundColor: AppColors.mainColor,
-                                ),
-                              )
-                            : Container(),
-                        Get.find<ProduitController>().totalItems >= 1
-                            ? Positioned(
-                                right: 3,
-                                top: 3,
-                                child: BigText(
-                                  text: Get.find<ProduitController>()
-                                      .totalItems
-                                      .toString(),
-                                  size: 12,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : Container(),
-                      ],
+                    return GestureDetector(
+                      onTap: () {
+                        if (p.totalItems >= 1)
+                          Get.toNamed(RouteHelper.getCartPage());
+                      },
+                      child: Stack(
+                        children: [
+                          AppIcon(icon: Icons.shopping_cart_outlined),
+                          p.totalItems >= 1
+                              ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: AppIcon(
+                                    icon: Icons.circle,
+                                    size: 20,
+                                    iconColor: Colors.transparent,
+                                    backgroundColor: AppColors.mainColor,
+                                  ),
+                                )
+                              : Container(),
+                          Get.find<ProduitController>().totalItems >= 1
+                              ? Positioned(
+                                  right: 3,
+                                  top: 3,
+                                  child: BigText(
+                                    text: Get.find<ProduitController>()
+                                        .totalItems
+                                        .toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Container(),
+                        ],
+                      ),
                     );
                   })
                 ],

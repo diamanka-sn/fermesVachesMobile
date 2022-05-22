@@ -21,13 +21,15 @@ class CartController extends GetxController {
         totalQuantity = value.quantity! + quantity;
 
         return CartModel(
-            id: value.id,
-            name: value.name,
-            price: value.price,
-            img: value.img,
-            quantity: value.quantity! + quantity,
-            isExist: true,
-            time: DateTime.now().toString());
+          id: value.id,
+          name: value.name,
+          price: value.price,
+          img: value.img,
+          quantity: value.quantity! + quantity,
+          isExist: true,
+          time: DateTime.now().toString(),
+          product: produit,
+        );
       });
 
       if (totalQuantity <= 0) {
@@ -38,19 +40,22 @@ class CartController extends GetxController {
         _items.putIfAbsent(produit.id!, () {
           // _items.forEach((key, value) {});
           return CartModel(
-              id: produit.id,
-              name: produit.name,
-              price: produit.price,
-              img: produit.img,
-              quantity: quantity,
-              isExist: true,
-              time: DateTime.now().toString());
+            id: produit.id,
+            name: produit.name,
+            price: produit.price,
+            img: produit.img,
+            quantity: quantity,
+            isExist: true,
+            time: DateTime.now().toString(),
+            product: produit,
+          );
         });
       } else {
         Get.snackbar("Compteur produit", "Ajouter au moins un produit!",
             backgroundColor: AppColors.mainColor, colorText: Colors.white);
       }
     }
+    update();
   }
 
   bool existInCart(ProductModel produit) {
