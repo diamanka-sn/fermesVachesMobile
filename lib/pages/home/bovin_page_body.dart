@@ -119,7 +119,8 @@ class _BovinPageBodyState extends State<BovinPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommandedProduit(index));
+                        Get.toNamed(
+                            RouteHelper.getRecommandedProduit(index, "home"));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -250,7 +251,7 @@ class _BovinPageBodyState extends State<BovinPageBody> {
       child: Stack(children: [
         GestureDetector(
           onTap: () {
-            Get.toNamed(RouteHelper.getProduit(index));
+            Get.toNamed(RouteHelper.getProduit(index, "home"));
           },
           child: Container(
             height: Dimensions.pageViewContainer,

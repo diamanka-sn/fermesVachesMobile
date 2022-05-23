@@ -12,9 +12,10 @@ class RouteHelper {
   static const String cartPage = "/cart-page";
 
   static String getInitial() => '$initial';
-  static String getProduit(int padeId) => '$produits?pageId=$padeId';
-  static String getRecommandedProduit(int pageId) =>
-      '$recommandedProduits?pageId=$pageId';
+  static String getProduit(int padeId, String page) =>
+      '$produits?pageId=$padeId&page=$page';
+  static String getRecommandedProduit(int pageId, String page) =>
+      '$recommandedProduits?pageId=$pageId&page=$page';
   static String getCartPage() => '$cartPage';
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => MainHomePage()),
@@ -22,14 +23,17 @@ class RouteHelper {
         name: produits,
         page: () {
           var pageId = Get.parameters['pageId'];
-          return ProduitDetailPage(pageId: int.parse(pageId!));
+          var page = Get.parameters['page'];
+          return ProduitDetailPage(pageId: int.parse(pageId!), page: page!);
         },
         transition: Transition.fadeIn),
     GetPage(
         name: recommandedProduits,
         page: () {
           var pageId = Get.parameters['pageId'];
-          return RecommandedProduitDetail(pageId: int.parse(pageId!));
+          var page = Get.parameters['page'];
+          return RecommandedProduitDetail(
+              pageId: int.parse(pageId!), page: page!);
         },
         transition: Transition.fadeIn),
     GetPage(

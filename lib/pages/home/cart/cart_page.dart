@@ -88,8 +88,8 @@ class CartPage extends StatelessWidget {
                                           .produitList
                                           .indexOf(_cartList[index].product!);
                                   if (produitIndex >= 0) {
-                                    Get.toNamed(
-                                        RouteHelper.getProduit(produitIndex));
+                                    Get.toNamed(RouteHelper.getProduit(
+                                        produitIndex, "cartpage"));
                                   } else {
                                     var recommandedIndex =
                                         Get.find<RecommandedController>()
@@ -97,7 +97,7 @@ class CartPage extends StatelessWidget {
                                             .indexOf(_cartList[index].product!);
                                     Get.toNamed(
                                         RouteHelper.getRecommandedProduit(
-                                            recommandedIndex));
+                                            recommandedIndex, "cartpage"));
                                   }
                                 },
                                 child: Container(
@@ -198,6 +198,69 @@ class CartPage extends StatelessWidget {
                   }),
                 ))),
       ]),
+      bottomNavigationBar: GetBuilder<CartController>(
+        builder: (cartController) {
+          return Container(
+            height: Dimensions.bottomHeightBar,
+            padding: EdgeInsets.only(
+                top: Dimensions.height30,
+                bottom: Dimensions.height30,
+                left: Dimensions.width20,
+                right: Dimensions.width20),
+            decoration: BoxDecoration(
+                color: AppColors.buttonBackgroundColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimensions.radius20 * 2),
+                    topRight: Radius.circular(Dimensions.radius20 * 2))),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.width20,
+                        right: Dimensions.width20),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: Colors.white),
+                    child: Row(children: [
+                      SizedBox(
+                        width: Dimensions.width10 / 2,
+                      ),
+                      BigText(
+                          text: cartController.totalCommande.toString() +
+                              " F cfa"),
+                      SizedBox(
+                        width: Dimensions.width10 / 2,
+                      ),
+                    ]),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      //  produits.addItem(produit);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          top: Dimensions.height20,
+                          bottom: Dimensions.height20,
+                          left: Dimensions.width20,
+                          right: Dimensions.width20),
+                      child: BigText(
+                        text: "Commander",
+                        color: Colors.white,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: AppColors.mainColor),
+                    ),
+                  )
+                ]),
+          );
+        },
+      ),
     );
   }
 }

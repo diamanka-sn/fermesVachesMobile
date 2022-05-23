@@ -20,7 +20,9 @@ import '../../../widgets/icon_and_text_widget.dart';
 
 class ProduitDetailPage extends StatelessWidget {
   final int pageId;
-  const ProduitDetailPage({Key? key, required this.pageId}) : super(key: key);
+  final String page;
+  const ProduitDetailPage({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,11 @@ class ProduitDetailPage extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Get.to(() => MainHomePage());
+                        if (page == "cartpage") {
+                          Get.toNamed(RouteHelper.getCartPage());
+                        } else {
+                          Get.toNamed(RouteHelper.getInitial());
+                        }
                       },
                       child: AppIcon(icon: Icons.arrow_back_ios)),
                   GetBuilder<ProduitController>(builder: (p) {
