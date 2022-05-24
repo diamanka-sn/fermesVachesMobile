@@ -43,6 +43,7 @@ class _BovinPageBodyState extends State<BovinPageBody> {
   @override
   void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   @override
