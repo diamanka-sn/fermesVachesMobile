@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
+import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
 import 'package:ferme_vaches_mobile/routes/route_helper.dart';
+import 'package:ferme_vaches_mobile/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,10 +19,15 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
+  Future<void> _loadRessource() async {
+    await Get.find<ProduitController>().getProduitList();
+    await Get.find<RecommandedController>().getRecommandedProduitList();
+  }
 
   @override
   void initState() {
     super.initState();
+    _loadRessource();
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..forward();
@@ -41,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Center(
               child: Image.asset(
                 "assets/images/logo.jpg",
-                width: 250,
+                width: Dimensions.splashImg,
               ),
             ),
           ),

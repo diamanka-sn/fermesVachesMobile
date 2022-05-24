@@ -24,14 +24,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.find<ProduitController>().getProduitList();
-    Get.find<RecommandedController>().getRecommandedProduitList();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'KosSam Ferme',
-      // home: SplashScreen(),
-      initialRoute: RouteHelper.getSpashPage(),
-      getPages: RouteHelper.routes,
-    );
+    return GetBuilder<ProduitController>(builder: (_) {
+      return GetBuilder<RecommandedController>(builder: (_) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'KosSam Ferme',
+          // home: SplashScreen(),
+          initialRoute: RouteHelper.getSpashPage(),
+          getPages: RouteHelper.routes,
+        );
+      });
+    });
   }
 }

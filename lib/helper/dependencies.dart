@@ -20,5 +20,7 @@ Future<void> init() async {
   //controller
   Get.lazyPut(() => ProduitController(produitRepo: Get.find()));
   Get.lazyPut(() => RecommandedController(recommandedRepo: Get.find()));
-  Get.lazyPut(() => CartController(cartRepo: Get.find()));
+  Get.lazyPut(
+    () => CartController(cartRepo: Get.find()),
+  );
 }
