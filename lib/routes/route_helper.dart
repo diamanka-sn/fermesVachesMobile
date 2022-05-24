@@ -1,10 +1,10 @@
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
-import 'package:ferme_vaches_mobile/pages/home/produits/produit_detail_page.dart';
-import 'package:ferme_vaches_mobile/pages/home/produits/recommanded_produit_details.dart';
+import 'package:ferme_vaches_mobile/pages/produits/produit_detail_page.dart';
+import 'package:ferme_vaches_mobile/pages/produits/recommanded_produit_details.dart';
 import 'package:ferme_vaches_mobile/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 
-import '../pages/home/cart/cart_page.dart';
+import '../pages/cart/cart_page.dart';
 import '../pages/home/home_page.dart';
 
 class RouteHelper {

@@ -1,10 +1,7 @@
-import 'dart:ffi';
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
-import 'package:ferme_vaches_mobile/pages/home/produits/produit_detail_page.dart';
 import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
 import 'package:ferme_vaches_mobile/utils/dimensions.dart';
@@ -13,7 +10,6 @@ import 'package:ferme_vaches_mobile/widgets/app_constants.dart';
 import 'package:ferme_vaches_mobile/widgets/big_text.dart';
 import 'package:ferme_vaches_mobile/widgets/icon_and_text_widget.dart';
 import 'package:ferme_vaches_mobile/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

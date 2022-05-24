@@ -17,9 +17,9 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     MainHomePage(),
-    Container(child: Center(child: Text('Page suivante'))),
-    Container(child: Center(child: Text('Page suivante 1'))),
-    Container(child: Center(child: Text('Page suivante 2')))
+    Container(child: Center(child: Text('Page Historique'))),
+    Container(child: Center(child: Text('Page  panier'))),
+    Container(child: Center(child: Text('Page espace client')))
   ];
 
   void onTapNav(int index) {

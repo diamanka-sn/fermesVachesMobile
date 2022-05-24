@@ -1,7 +1,7 @@
 import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/model/produit_model.dart';
-import 'package:ferme_vaches_mobile/pages/home/cart/cart_page.dart';
+import 'package:ferme_vaches_mobile/pages/cart/cart_page.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/routes/route_helper.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
