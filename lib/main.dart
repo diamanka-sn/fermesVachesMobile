@@ -1,3 +1,4 @@
+import 'package:ferme_vaches_mobile/controller/cart_controller.dart';
 import 'package:ferme_vaches_mobile/controller/produit_controller.dart';
 import 'package:ferme_vaches_mobile/controller/recommanded_controller.dart';
 import 'package:ferme_vaches_mobile/routes/route_helper.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
     return GetBuilder<ProduitController>(builder: (_) {
       return GetBuilder<RecommandedController>(builder: (_) {
         return GetMaterialApp(

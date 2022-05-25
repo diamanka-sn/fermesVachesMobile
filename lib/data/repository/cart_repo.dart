@@ -9,17 +9,24 @@ class CartRepo {
   CartRepo({required this.sharedPreferences});
 
   List<String> cart = [];
+  List<String> cartHistory = [];
 
   void addToCartList(List<CartModel> cartList) {
+    // sharedPreferences.remove(AppConstans.CART_LIST);
+    // sharedPreferences.remove(AppConstans.CART_HISTORY_LIST);
+    var time = DateTime.now().toString();
     cart = [];
     // convertir les object en string
     // cartList.forEach((element) {
     //   return cart.add(jsonEncode(element));
     // });
 
-    cartList.forEach((element) => cart.add(jsonEncode(element)));
+    cartList.forEach((element) {
+      element.time = time;
+      return cart.add(jsonEncode(element));
+    });
     sharedPreferences.setStringList(AppConstans.CART_LIST, cart);
-    getCartList();
+    // getCartList();
   }
 
   List<CartModel> getCartList() {
@@ -33,7 +40,37 @@ class CartRepo {
     //   cartList.add(CartModel.fromJson(jsonDecode(element)));
     // });
 
-    carts.forEach((element) => CartModel.fromJson(jsonDecode(element)));
+    carts.forEach(
+        (element) => cartList.add(CartModel.fromJson(jsonDecode(element))));
     return cartList;
+  }
+
+  List<CartModel> getCartHistory() {
+    if (sharedPreferences.containsKey(AppConstans.CART_HISTORY_LIST)) {
+      cartHistory = [];
+      cartHistory =
+          sharedPreferences.getStringList(AppConstans.CART_HISTORY_LIST)!;
+    }
+    List<CartModel> cartListHistory = [];
+    cart.forEach((element) =>
+        cartListHistory.add(CartModel.fromJson(jsonDecode(element))));
+    return cartListHistory;
+  }
+
+  void addToCartHistoryList() {
+    if (sharedPreferences.containsKey(AppConstans.CART_HISTORY_LIST)) {
+      cartHistory =
+          sharedPreferences.getStringList(AppConstans.CART_HISTORY_LIST)!;
+    }
+    for (int i = 0; i < cart.length; i++) {
+      cartHistory.add(cart[i]);
+    }
+    removeCart();
+    sharedPreferences.setStringList(AppConstans.CART_HISTORY_LIST, cartHistory);
+  }
+
+  void removeCart() {
+    cart = [];
+    sharedPreferences.remove(AppConstans.CART_LIST);
   }
 }
