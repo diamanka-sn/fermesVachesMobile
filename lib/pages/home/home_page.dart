@@ -1,6 +1,6 @@
+import 'package:ferme_vaches_mobile/pages/cart/cart_history.dart';
 import 'package:ferme_vaches_mobile/pages/home/main_home_page.dart';
 import 'package:ferme_vaches_mobile/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   List pages = [
     MainHomePage(),
     Container(child: Center(child: Text('Page Historique'))),
-    Container(child: Center(child: Text('Page  panier'))),
+    CartHistory(),
     Container(child: Center(child: Text('Page espace client')))
   ];
 

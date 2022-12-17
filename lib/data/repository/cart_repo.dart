@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:ferme_vaches_mobile/model/cart_model.dart';
 import 'package:ferme_vaches_mobile/widgets/app_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartRepo {
@@ -12,8 +14,6 @@ class CartRepo {
   List<String> cartHistory = [];
 
   void addToCartList(List<CartModel> cartList) {
-    // sharedPreferences.remove(AppConstans.CART_LIST);
-    // sharedPreferences.remove(AppConstans.CART_HISTORY_LIST);
     var time = DateTime.now().toString();
     cart = [];
     // convertir les object en string
@@ -26,7 +26,7 @@ class CartRepo {
       return cart.add(jsonEncode(element));
     });
     sharedPreferences.setStringList(AppConstans.CART_LIST, cart);
-    // getCartList();
+    getCartList();
   }
 
   List<CartModel> getCartList() {
@@ -45,7 +45,7 @@ class CartRepo {
     return cartList;
   }
 
-  List<CartModel> getCartHistory() {
+  List<CartModel> getCartHistoryList() {
     if (sharedPreferences.containsKey(AppConstans.CART_HISTORY_LIST)) {
       cartHistory = [];
       cartHistory =
@@ -66,7 +66,6 @@ class CartRepo {
       cartHistory.add(cart[i]);
     }
     removeCart();
-    sharedPreferences.setStringList(AppConstans.CART_HISTORY_LIST, cartHistory);
   }
 
   void removeCart() {
